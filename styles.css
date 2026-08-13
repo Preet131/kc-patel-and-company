@@ -693,46 +693,86 @@ button, input, select, textarea {
   align-items: center;
 }
 
-.legacy-img-wrapper {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border-gold);
+/* Advocate Professional Directory Card (No Photograph - BCI Rule 36 Compliant) */
+.advocate-credentials-card {
   background: var(--secondary-slate);
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
+  padding: 36px 28px;
 }
 
-.legacy-img-wrapper img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
+.advocate-card-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.advocate-caption-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(5, 12, 24, 0.96) 30%, rgba(5, 12, 24, 1) 100%);
-  padding: 24px;
-  border-top: 1px solid var(--border-gold);
-}
-
-.advocate-title-info h4 {
-  font-family: var(--font-heading-cinzel);
-  font-size: 1.3rem;
-  color: var(--surface-white);
-  line-height: 1.2;
-}
-
-.advocate-title-info p {
-  font-size: 0.82rem;
+.firm-emblem-large {
+  width: 56px;
+  height: 56px;
+  background: var(--primary-navy-dark);
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent-gold);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-family: var(--font-heading-cinzel);
+  font-size: 1.5rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.advocate-card-header h3 {
+  font-family: var(--font-heading-cinzel);
+  font-size: 1.35rem;
+  color: var(--surface-white);
+  line-height: 1.25;
+}
+
+.academic-degrees {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
   font-weight: 600;
   margin-top: 4px;
+}
+
+.advocate-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cred-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.cred-icon {
+  color: var(--accent-gold);
+  font-size: 1.1rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.cred-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 2px;
+}
+
+.cred-value {
+  font-size: 0.92rem;
+  color: #E2E8F0;
+  line-height: 1.5;
 }
 
 .legacy-content p {

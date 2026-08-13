@@ -1,10 +1,11 @@
 /* ==========================================================================
    K C PATEL & COMPANY (ADVOCATES & ATTORNEYS)
    Interactive Client-side Features & Local Storage Management
+   BCI Rule 36 Compliant (Information Directory Format)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Bar Council of India (BCI) Disclaimer Modal Setup
+  // 1. Bar Council of India (BCI) Disclaimer Modal Setup (PRESERVED)
   initDisclaimerModal();
 
   // 2. Navigation & Mobile Drawer
@@ -13,17 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. FAQ Accordion & Live Filter
   initFaqAccordion();
 
-  // 4. Consultation Form Handlers (Hero & Modal)
-  initFormHandlers();
-
-  // 5. Practice Area Modals
+  // 4. Practice Area Scope Modals
   initPracticeAreaModals();
 
-  // 6. Number Counter Animation for Stats
+  // 5. Number Counter Animation for Practice Metrics
   initCounterAnimation();
 });
 
-/* --- 1. Bar Council Disclaimer Modal --- */
+/* --- 1. Bar Council Disclaimer Gateway Modal (PRESERVED) --- */
 function initDisclaimerModal() {
   const modalOverlay = document.getElementById('bci-modal-overlay');
   const btnAgree = document.getElementById('bci-btn-agree');
@@ -34,7 +32,6 @@ function initDisclaimerModal() {
   const isAccepted = localStorage.getItem('kcpatel_bci_accepted');
 
   if (!isAccepted) {
-    // Show modal after slight delay for smooth entrance
     setTimeout(() => {
       modalOverlay.classList.add('active');
     }, 400);
@@ -44,7 +41,6 @@ function initDisclaimerModal() {
     btnAgree.addEventListener('click', () => {
       localStorage.setItem('kcpatel_bci_accepted', 'true');
       modalOverlay.classList.remove('active');
-      showToast('Welcome to K C Patel & Company Advocates & Attorneys.');
     });
   }
 
@@ -61,7 +57,6 @@ function initNavigation() {
   const mobileToggle = document.getElementById('mobile-toggle');
   const navMenu = document.getElementById('nav-menu');
   const navLinks = document.querySelectorAll('.nav-link');
-  const siteHeader = document.querySelector('.site-header');
 
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
@@ -72,7 +67,6 @@ function initNavigation() {
     });
   }
 
-  // Close menu when clicking links
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (navMenu && navMenu.classList.contains('active')) {
@@ -84,7 +78,6 @@ function initNavigation() {
     });
   });
 
-  // Active link scroll spy
   const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
@@ -114,7 +107,6 @@ function initFaqAccordion() {
     header.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
       
-      // Close all open FAQs
       faqItems.forEach(otherItem => {
         otherItem.classList.remove('active');
       });
@@ -125,7 +117,6 @@ function initFaqAccordion() {
     });
   });
 
-  // FAQ Search functionality
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase().trim();
@@ -144,87 +135,19 @@ function initFaqAccordion() {
   }
 }
 
-/* --- 4. Consultation Form Handlers & Modal --- */
-function initFormHandlers() {
-  const heroForm = document.getElementById('hero-intake-form');
-  const modalForm = document.getElementById('modal-intake-form');
-  const consultModalOverlay = document.getElementById('consult-modal-overlay');
-  const openModalBtns = document.querySelectorAll('.trigger-consult-modal');
-  const closeModalBtn = document.getElementById('close-consult-modal');
-
-  const handleFormSubmit = (e, formElement) => {
-    e.preventDefault();
-    const formData = new FormData(formElement);
-    const name = formData.get('name') || 'Client';
-    const phone = formData.get('phone');
-    const service = formData.get('service');
-
-    if (!phone || phone.length < 8) {
-      showToast('Please enter a valid telephone number for consultation.', 'error');
-      return;
-    }
-
-    // Reset Form
-    formElement.reset();
-
-    // Close Modal if open
-    if (consultModalOverlay) {
-      consultModalOverlay.classList.remove('active');
-    }
-
-    // Show Success Message
-    showToast(`Thank you, ${name}! Your consultation request regarding ${service} has been received. Our advocates will contact you shortly.`, 'success');
-  };
-
-  if (heroForm) {
-    heroForm.addEventListener('submit', (e) => handleFormSubmit(e, heroForm));
-  }
-
-  if (modalForm) {
-    modalForm.addEventListener('submit', (e) => handleFormSubmit(e, modalForm));
-  }
-
-  // Open Consult Modal
-  openModalBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const preselectedService = btn.getAttribute('data-service');
-      if (preselectedService && modalForm) {
-        const selectElem = modalForm.querySelector('select[name="service"]');
-        if (selectElem) selectElem.value = preselectedService;
-      }
-      if (consultModalOverlay) {
-        consultModalOverlay.classList.add('active');
-      }
-    });
-  });
-
-  // Close Consult Modal
-  if (closeModalBtn && consultModalOverlay) {
-    closeModalBtn.addEventListener('click', () => {
-      consultModalOverlay.classList.remove('active');
-    });
-
-    consultModalOverlay.addEventListener('click', (e) => {
-      if (e.target === consultModalOverlay) {
-        consultModalOverlay.classList.remove('active');
-      }
-    });
-  }
-}
-
-/* --- 5. Practice Area Modals --- */
+/* --- 4. Practice Area Information Modals --- */
 function initPracticeAreaModals() {
   const serviceModalOverlay = document.getElementById('service-detail-modal');
   const serviceModalTitle = document.getElementById('service-modal-title');
   const serviceModalDesc = document.getElementById('service-modal-desc');
   const serviceModalItems = document.getElementById('service-modal-items');
   const closeServiceModalBtn = document.getElementById('close-service-modal');
+  const closeServiceModalBtnFooter = document.getElementById('close-service-modal-btn');
 
   const practiceData = {
     'trademark': {
       title: 'Trademark Protection & Prosecution',
-      desc: 'Comprehensive trademark registration, brand protection, and legal defense under the Trade Marks Act, 1999.',
+      desc: 'Trademark search, classification, filing, examination response, and opposition representation under the Trade Marks Act, 1999.',
       items: [
         'Pre-Filing IP Search & Registrability Assessment across all 45 WIPO classes.',
         'Provisional & Official Trademark Application Filing (TM-A) with Controller General.',
@@ -235,7 +158,7 @@ function initPracticeAreaModals() {
     },
     'patent': {
       title: 'Patent Advisory & Drafting Services',
-      desc: 'End-to-end patent prosecution and technical drafting under the Indian Patents Act, 1970.',
+      desc: 'Patent prosecution and technical drafting under the Indian Patents Act, 1970.',
       items: [
         'Prior Art & Patentability Searches across Indian & WIPO Patent Databases.',
         'Drafting Provisional and Complete Specifications (Technical Claim Structuring).',
@@ -246,7 +169,7 @@ function initPracticeAreaModals() {
     },
     'design': {
       title: 'Industrial Design & Copyright Registration',
-      desc: 'Safeguarding ornamental shape, configuration, patterns, and creative expressions.',
+      desc: 'Design registration under the Designs Act, 2000, and copyright registration procedures.',
       items: [
         'Industrial Design Application Filing under the Designs Act, 2000.',
         'Locarno Classification alignment for industrial products and packaging.',
@@ -256,14 +179,14 @@ function initPracticeAreaModals() {
       ]
     },
     'infringement': {
-      title: 'Infringement Advisory & Litigation Support',
-      desc: 'Robust legal defense, cease & desist actions, and IP dispute resolution.',
+      title: 'Infringement Advisory & Legal Procedures',
+      desc: 'Dispute advisory, cease & desist notices, and IP court representation.',
       items: [
         'Drafting and Serving Formal Cease & Desist Legal Notices.',
         'Interim and Permanent Injunction Proceedings in Civil Courts.',
         'Counterfeit Goods Seizure Strategy and Police Coordination.',
         'Domain Name Dispute Resolution (INDRP & UDRP Proceedings).',
-        'Out-of-Court Settlement Drafting and Licensing Compromise Terms.'
+        'Out-of-Court Settlement Drafting and Licensing Terms.'
       ]
     }
   };
@@ -292,20 +215,23 @@ function initPracticeAreaModals() {
     });
   });
 
-  if (closeServiceModalBtn && serviceModalOverlay) {
-    closeServiceModalBtn.addEventListener('click', () => {
-      serviceModalOverlay.classList.remove('active');
-    });
+  const closeModal = () => {
+    if (serviceModalOverlay) serviceModalOverlay.classList.remove('active');
+  };
 
+  if (closeServiceModalBtn) closeServiceModalBtn.addEventListener('click', closeModal);
+  if (closeServiceModalBtnFooter) closeServiceModalBtnFooter.addEventListener('click', closeModal);
+
+  if (serviceModalOverlay) {
     serviceModalOverlay.addEventListener('click', (e) => {
       if (e.target === serviceModalOverlay) {
-        serviceModalOverlay.classList.remove('active');
+        closeModal();
       }
     });
   }
 }
 
-/* --- 6. Stats Counter Animation --- */
+/* --- 5. Stats Counter Animation --- */
 function initCounterAnimation() {
   const counters = document.querySelectorAll('.counter-val');
   let animated = false;
@@ -336,29 +262,4 @@ function initCounterAnimation() {
       runCounters();
     }
   });
-}
-
-/* --- Toast Notification Utility --- */
-function showToast(message, type = 'info') {
-  let toast = document.getElementById('custom-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'custom-toast';
-    toast.className = 'toast-notification';
-    document.body.appendChild(toast);
-  }
-
-  const icon = type === 'error' ? 'fa-exclamation-triangle' : 'fa-check-circle';
-  const color = type === 'error' ? '#EF4444' : '#D4AF37';
-
-  toast.innerHTML = `
-    <i class="fas ${icon}" style="color: ${color}; font-size: 1.2rem;"></i>
-    <span>${message}</span>
-  `;
-
-  toast.classList.add('show');
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4500);
 }
